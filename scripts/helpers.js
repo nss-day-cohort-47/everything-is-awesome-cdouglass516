@@ -18,7 +18,9 @@ export const invertColor = (hex) => {
 	// pad each with zeros and return
 	return padZero(r) + padZero(g) + padZero(b);
   }
-  
+  export const makeUpper = (item) =>{
+	  return item.toUpperCase();
+  }
   function padZero(str, len) {
 	len = len || 2;
 	var zeros = new Array(len).join('0');
