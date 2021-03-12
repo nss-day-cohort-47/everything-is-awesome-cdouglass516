@@ -7,13 +7,13 @@ const navElement = document.querySelector("nav");
 navElement.addEventListener("change", (event) => {
 	if (event.target.id === "brickMaterial") {
 		const mtl = document.getElementById(event.target.id).value;
-		filterLegos(mtl,"M");
+		filterLegos(mtl,"Material");
 	}
 	if (event.target.id === "LegoId") {
-		filterLegos(document.getElementById("LegoId").value,"N");
+		filterLegos(document.getElementById("LegoId").value,"LegoNumber");
 	}
 	if(event.target.id === "byYear") {
-		filterLegos("","S");
+		filterLegos("","Sort");
 	}
 });
 
@@ -25,7 +25,7 @@ navElement.addEventListener("keyup", (event) => {
 	else if (event.keyCode === 13) {
 		// Cancel the default action, if needed
 		event.preventDefault();
-		filterLegos(document.getElementById("LegoId").value,"N");
+		filterLegos(document.getElementById("LegoId").value,"LegoNumber");
 	}
 });
   // do something
@@ -33,13 +33,13 @@ navElement.addEventListener("keyup", (event) => {
 navElement.addEventListener("click", (event) => {
 
 	if (event.target.id === "showBlue") {
-		filterLegos("Blue",'C');
+		filterLegos("Blue",'Color');
 	}
 	else if (event.target.id === "showRed") {
-		filterLegos("Red",'C');
+		filterLegos("Red",'Color');
 	} 
 	else if (event.target.id === "showGreen") {
-		filterLegos("Green",'C');
+		filterLegos("Green",'Color');
 	} 
 	else if (event.target.id === "showAll") {
 		makeLegoList(useLegos());
@@ -48,24 +48,24 @@ navElement.addEventListener("click", (event) => {
 
 const filterLegos = (whatFilter, type) => {
 	let filterArray = [];
-	if (type === 'A') {
+	if (type === 'All') {
 		filterArray = useLegos();
 	}
-	if (type === 'C') {
+	if (type === 'Color') {
 		filterArray = useLegos().filter(singleLego => {
 			if (singleLego.LegoName.includes(whatFilter.toUpperCase())) {
 				return singleLego;
 			}
 		})
 	}
-	else if (type === 'M') {
+	else if (type === 'Material') {
 		filterArray = useLegos().filter(singleLego => {
 			if (singleLego.Material.includes(whatFilter)) {
 				return singleLego;
 			}
 		})
 	}
-	else if (type === 'N') {
+	else if (type === 'LegoNumber') {
 		filterArray = useLegos().filter(singleLego => {
 			if (singleLego.LegoId === whatFilter) {
 				return singleLego;
@@ -78,7 +78,7 @@ const filterLegos = (whatFilter, type) => {
 	let noYear = [];
 	let year = [];
 	const srt = document.getElementById('byYear').value;
-	if (filterArray.length < 1 && type === 'S') {
+	if (filterArray.length < 1 && type === 'Sort') {
 		filterArray = useLegos();
 	}
 	filterArray.forEach(item => {
